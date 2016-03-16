@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="VantaApp"  ng-controller="VantaAppCtrl">
+    <head>
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <script src="./js/angular.min.js"></script>
+        <script src="./js/angular-locale_pt-br.js"></script>        
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+        <script>
+
+            angular.module('VantaApp', []);
+            angular.module('VantaApp').controller('VantaAppCtrl', function($scope) {
+                $scope.titulo = "Vanta App";
+                $scope.slogan = "Leve sempre vantagem!";
+                $scope.medidas = [
+                    {label: 'kg', valor :1000}, 
+                    {label: 'mg', valor :1}, 
+                    {label: 'l', valor :1000}, 
+                    {label: 'ml', valor :1}
+                ];
+            });
+
+        </script>
+        <style>
+            .jumbotron {
+                width: 500px;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 20px;
+            }
+
+            .form {
+                width: 350px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 20px; 
+            }
+
+        </style>
+        <title>{{titulo}}</title>
+    </head>
+    <body>
+        <!-- <div class="app"> -->
+        <div class="jumbotron">
+            <h3>{{titulo}}</h3>
+            <hr />
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="number" min="1" max="99" ng-model="quantidade" class="form-control" placeholder="Qtd."/>
+                    <input type="number" min="1" max="1000" ng-model="unitario" class="form-control" />
+                    <select class="form-control" name="medida" ng-model="medida" ng-options="medida.label | uppercase for medida in medidas">
+                        <option>Selecione a medida</option>
+                    </select>
+                    <input type="text" ng-model="valor" value="valor"class="form-control" placeholder="Valor unidade R$"/>
+                </div>
+            </form>
+        </div>
+        {{quantidade * medida.valor * valor / unitario}}
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
