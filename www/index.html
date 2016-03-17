@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html ng-app="VantaApp"  ng-controller="VantaAppCtrl">
+<html ng-app="VantaApp" ng-controller="VantaAppCtrl">
     <head>
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <script src="./js/angular.min.js"></script>
         <script src="./js/angular-locale_pt-br.js"></script>        
+        <script type="text/javascript" src="js/index.js"></script>
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
-
         <script>
             angular.module('VantaApp', []);
             angular.module('VantaApp').controller('VantaAppCtrl', function($scope) {
@@ -44,29 +44,24 @@
         <title>{{titulo}}</title>
     </head>
     <body>
-    <div class="jumbotron">
-        <h3 style="margin-top:0px;">{{titulo}}</h3>
-        <h5>{{slogan}}</h5>
-        
-        <div id="primeira">
-            <form action="#" method="post" class="form">
-                <input class="form-control" id="quantidade" ng-model="quantidade" name="quantidade" type="number" min="1" max="5"  placeholder="Qtd."/>
-                <br />
-                <input class="form-control" id="valor" ng-model="valor" name="valor" type="number" min="1" max="5" placeholder="Valor R$"/>
-                <br />
-                <input class="form-control" id="number" ng-model="unidade" min="1" max="9999" name="unidade" type="text"  placeholder="Unidade"/>
-                <br />
-                <select class="form-control" name="medida" ng-model="medida" ng-options="medida.label | uppercase for medida in medidas" placeholder="Medida"/>
-                    <option value="">-------- Selecione a medida --------</option>
-                </select>
-            </form>
+        <div class="jumbotron">
+            <h3 style="margin-top:0px;">{{titulo}}</h3>
+            <h5>{{slogan}}</h5>
+            <div id="primeira">
+                <form action="#" method="post" class="form">
+                    <input class="form-control" id="quantidade" ng-model="quantidade" name="quantidade" type="number" min="1" max="99"  placeholder="Qtd."/>
+                    <br />
+                    <input class="form-control" id="valor" ng-model="valor" name="valor" type="number" min="1" max="5" placeholder="Valor R$"/>
+                    <br />
+                    <input class="form-control" id="number" ng-model="unidade" min="1" max="9999" name="unidade" type="text"  placeholder="Unidade"/>
+                    <br />
+                    <select class="form-control" name="medida" ng-model="medida" ng-options="medida.label | uppercase for medida in medidas" placeholder="Medida"/>
+                        <option value="">-------- Selecione a medida --------</option>
+                    </select>
+                    {{quantidade}}
+                </form>
+            </div>
         </div>
-    </div>
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
-        {{quantidade * medida.valor * valor / unitario}}
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    <!-- pepeka boa -->
+
     </body>
 </html>
