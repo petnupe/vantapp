@@ -7,7 +7,7 @@
     <author email="pemadata@gmail.com" href="http://cordova.io">
         PeMaDaTaTeam@
     </author>
-    <content src="index.html" />
+    <content src="www/index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
