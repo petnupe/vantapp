@@ -12,55 +12,82 @@
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <script>
             angular.module('VantaApp', []);
-            angular.module('VantaApp').controller('VantaAppCtrl', function($scope) {
+            angular.module('VantaApp').controller('VantaAppCtrl', function($scope, $filter) {
                 $scope.titulo = "Vanta App";
                 $scope.slogan = "Leve sempre vantagem!";
+
                 $scope.medidas = [
                     {label: 'kg', valor :1000}, 
                     {label: 'mg', valor :1}, 
                     {label: 'l', valor :1000}, 
                     {label: 'ml', valor :1}
                 ];
+
+                $scope.itens = [];
+
+                $scope.adicionaItem = function (item) {
+                    item.indice = item.valor / (item.quantidade * item.medida.valor * item.unidade);
+                    $scope.itens.push(item);
+                    delete $scope.item;
+                }
+
+                $scope.apagarItem = function (itens) {
+                    $scope.itens = itens.filter(function (item) {
+                        if (!item.selecionado) return item;
+                    });
+                }
             });
 
         </script>
         <style>
-            .jumbotron {
+          .jumbotron {
                 width: auto;
                 text-align: center;
                 margin-left: auto;
                 margin-right: auto;
-                margin-top: auto;
             }
-
-            .form {
-                width: auto;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 1px; 
-            }
-
         </style>
         <title>{{titulo}}</title>
     </head>
     <body>
         <div class="jumbotron">
-            <h3 style="margin-top:0px;">{{titulo}}</h3>
-            <h5>{{slogan}}</h5>
-            <div id="primeira">
-                <form action="#" method="post" class="form">
-                    <input class="form-control" id="quantidade" ng-model="quantidade" name="quantidade" type="number" min="1" max="99"  placeholder="Qtd."/>
+            <form name="AdicionaItens">
+                <h3 style="margin-top:0px;">{{titulo}}</h3>
+                <h5>{{slogan}}</h5>
+                <div id="primeira" ng-model="primeira">
+                    <table class="table table-striped" ng-if="itens.length">
+                        <tr>
+                            <th>#</th>
+                            <th>Qtd.</th>
+                            <th>Uni.</th>
+                            <th>R$.</th>
+                            <th>Med.</th>
+                            <th>Indice</th>
+                        </tr>
+                        <tr ng-repeat="item in itens | orderBy:'quantidade'">
+                            <td><input type="checkbox" ng-model="item.selecionado" /></td>
+                            <td>{{item.quantidade}}</td>
+                            <td>{{item.unidade}}</td>
+                            <td>{{item.valor}}</td>
+                            <td>{{item.medida.label}}</td>
+                            <td>{{item.indice}}</td>
+                        </tr>
+                    </table>
+                    <input class="form-control" id="quantidade" ng-model="item.quantidade" name="quantidade" type="number" min="1" max="99"  placeholder="Qtd." ng-required="true"/>
                     <br />
-                    <input class="form-control" id="valor" ng-model="valor" name="valor" type="number" min="1" max="5" placeholder="Valor R$"/>
+                    <input class="form-control" id="valor" ng-model="item.valor" name="valor" type="number" min="1" max="9999" placeholder="Valor R$" ng-required="true"/>
                     <br />
-                    <input class="form-control" id="number" ng-model="unidade" min="1" max="9999" name="unidade" type="text"  placeholder="Unidade"/>
+                    <input class="form-control" id="number" ng-model="item.unidade" min="1" max="9999" name="unidade" type="text" placeholder="Unidade" ng-required="true"/>
                     <br />
-                    <select class="form-control" name="medida" ng-model="medida" ng-options="medida.label | uppercase for medida in medidas" placeholder="Medida"/>
+                    <select class="form-control" name="medida" ng-model="item.medida" ng-options="medida.label | uppercase for medida in medidas" placeholder="Medida" ng-required="true"/>
                         <option value="">-------- Selecione a medida --------</option>
                     </select>
-                    {{quantidade}}
-                </form>
-            </div>
+                    <input type="hidden" ng-model="item.indice" value="1" />
+                    <br />
+                    <button class="btn btn-primary btn-lg" ng-click="adicionaItem(item)" ng-disabled="AdicionaItens.$invalid">+</button>
+                    <button class="btn btn-danger btn-lg" ng-click="apagarItem(itens)">-</button>
+                </div>
+            </form>
         </div>
     </body>
 </html>
