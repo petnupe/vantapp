@@ -9,7 +9,7 @@
         <script type="text/javascript" src="js/index.js"></script>
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        
         <script>
             angular.module('VantaApp', []);
             angular.module('VantaApp').controller('VantaAppCtrl', function($scope, $filter) {
@@ -45,6 +45,8 @@
                 text-align: center;
                 margin-left: auto;
                 margin-right: auto;
+                padding-top: 10px;
+                padding-bottom: 10px;
             }
         </style>
         <title>{{titulo}}</title>
@@ -77,7 +79,7 @@
                     <br />
                     <input class="form-control" id="valor" ng-model="item.valor" name="valor" type="number" min="1" max="9999" placeholder="Valor R$" ng-required="true"/>
                     <br />
-                    <input class="form-control" id="number" ng-model="item.unidade" min="1" max="9999" name="unidade" type="text" placeholder="Unidade" ng-required="true"/>
+                    <input class="form-control" id="number" ng-model="item.unidade" min="1" max="9999" name="unidade" type="number" placeholder="Unidade" ng-required="true"/>
                     <br />
                     <select class="form-control" name="medida" ng-model="item.medida" ng-options="medida.label | uppercase for medida in medidas" placeholder="Medida" ng-required="true"/>
                         <option value="">-------- Selecione a medida --------</option>
